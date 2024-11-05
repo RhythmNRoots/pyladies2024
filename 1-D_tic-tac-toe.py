@@ -30,11 +30,11 @@ def position():
         except:
             print("Please enter an integer between 0-19.")
             
-def move_is_possible(board):
-    if board[position()] == "-":
+def move_is_possible(board, position):
+    if board[position] == "-":
         return True
     else:
-        print("Position occupied.")
+        print(f"{position}. position occupied.")
         return False
 
 def move(board, mark, position):
@@ -52,16 +52,21 @@ def move(board, mark, position):
         new_board = board[:position] + mark + board[position +1 :]
     return new_board
         
-#def player_move(board):
-    """This function asks the player for the position,
-    returns the new game board or 
-    if the position is occupied asks for a new position."""
+
+def player_move(board):
+    """This function asks the player for the position (position function),
+    if the position is occupied (move_is_possible function) 
+    asks for a new position (position function)
+    and if position is not occupied returns the new board (move function)."""
     player_mark = 'x'
-    move(board, player_mark, position())
+    player_position = position()
+    while move_is_possible(board, player_position) == False:
+       player_position = position()
+    return move(board, player_mark, player_position)
 
 board1 = "--------------------"
 board2 = "oxox---------------o"
 
-print(move(board2, 'x', position()))
+print(player_move(board2))
 
 print(evaluate(board2))
