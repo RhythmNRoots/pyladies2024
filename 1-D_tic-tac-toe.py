@@ -1,3 +1,5 @@
+from random import randrange
+
 def evaluate(board):
     """This function evaluates the game board. 
     If x wins, returns 'x'
@@ -64,9 +66,20 @@ def player_move(board):
        player_position = position()
     return move(board, player_mark, player_position)
 
+def pc_move(board):
+    """This function randomly selects a position
+    if the position is occupied (move_is_possible function) 
+    randomly selects a new position (position function)
+    and if position is not occupied returns the new board (move function)."""
+    player_mark = 'o'
+    player_position = randrange(0, 20)
+    while move_is_possible(board, player_position) == False:
+       player_position = randrange(0, 20)
+    return move(board, player_mark, player_position)
+
 board1 = "--------------------"
 board2 = "oxox---------------o"
 
-print(player_move(board2))
+print(pc_move(board2))
 
 print(evaluate(board2))
