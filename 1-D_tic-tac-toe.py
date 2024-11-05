@@ -54,7 +54,6 @@ def move(board, mark, position):
         new_board = board[:position] + mark + board[position +1 :]
     return new_board
         
-
 def player_move(board):
     """This function asks the player for the position (position function),
     if the position is occupied (move_is_possible function) 
@@ -77,9 +76,30 @@ def pc_move(board):
        player_position = randrange(0, 20)
     return move(board, player_mark, player_position)
 
+def tictactoe_1d():
+    """This function is the whole tic-tac-toe. 
+    The player and the pc moves alternately until someone wins.
+    The board is evaluated after each round (evaluate function)."""
+    board = "--------------------"
+    while evaluate(board) == "-":
+        board = player_move(board)
+        print(board)
+        board = pc_move(board)
+        print(board)
+    # End of game
+    if evaluate(board) == "x":
+        print("Congratulations, you won!")
+    elif evaluate(board) == "o":
+        print("Unfortunately you didn't win this time.")
+    elif evaluate(board) == "!":
+        print("It's a tie.")
+
+
 board1 = "--------------------"
 board2 = "oxox---------------o"
 
-print(pc_move(board2))
+tictactoe_1d()
 
-print(evaluate(board2))
+#print(pc_move(board2))
+
+#print(evaluate(board2))
