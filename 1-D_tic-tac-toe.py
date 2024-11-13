@@ -76,6 +76,34 @@ def pc_move(board):
        player_position = randrange(0, 20)
     return move(board, player_mark, player_position)
 
+def pc_strategy_move(board):
+    player_mark = 'o'
+    if "-xx-" in board:
+        player_position = board.index('-xx-')
+    elif "oxx-" in board:
+        player_position = board.index('oxx-') + 3
+    elif "-xxo" in board:
+        player_position = board.index('-xxo')
+    elif "-xx" in board:
+        player_position = board.index('-xx')
+    elif "xx-" in board:
+        player_position = board.index('xx-') + 2
+    elif "-x-" in board:
+        player_position = board.index('-x-')
+    elif "ox-" in board:
+        player_position = board.index('ox-') + 2
+    elif "-xo" in board:
+        player_position = board.index('-xo')  
+    elif "-x" in board:
+        player_position = board.index('-x')
+    elif "x-" in board:
+        player_position = board.index('x-') + 1
+    else:
+        player_position = randrange(0, 20)
+        while move_is_possible(board, player_position) == False:
+            player_position = randrange(0, 20)
+    return move(board, player_mark, player_position)
+
 def tictactoe_1d():
     """This function is the whole tic-tac-toe. 
     The player and the pc moves alternately until someone wins.
@@ -84,7 +112,7 @@ def tictactoe_1d():
     while evaluate(board) == "-":
         board = player_move(board)
         print(board)
-        board = pc_move(board)
+        board = pc_strategy_move(board)
         print(board)
     # End of game
     if evaluate(board) == "x":
