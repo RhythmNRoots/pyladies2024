@@ -121,13 +121,3 @@ def tictactoe_1d():
         print("Unfortunately you didn't win this time.")
     elif evaluate(board) == "!":
         print("It's a tie.")
-
-
-board1 = "--------------------"
-board2 = "oxox---------------o"
-
-tictactoe_1d()
-
-#print(pc_move(board2))
-
-#print(evaluate(board2))
